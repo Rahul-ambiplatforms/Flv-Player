@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import FlvPlayer from "../components/FlvPlayer";
-
+import { Copy } from "lucide-react"; 
 // Define a constant array with stream URLs
 const streamUrls = [
     "https://media11.ambicam.com/live/eb16387d-f219-4174-81ce-dfb4810315ad.flv",
@@ -239,8 +239,17 @@ const StreamPage = () => {
             >
                 {/* Render the streams for the current page */}
                 {currentStreams.map((url, index) => (
+                                         
                     <div key={index} style={{ width: "100%", height: "auto" }}>
                         <FlvPlayer url={url} />
+                        <p style={{ textAlign: "center", marginTop: "10px", wordBreak: "break-all", display: "flex", justifyContent: "center", alignItems: "center", gap: "10px" }}>
+                            {url.replace(/^https/, "rtmp").replace(/\.com/, ".com:1938").replace(/\.flv$/, "")}
+                            <Copy 
+                                size={20} 
+                                style={{ cursor: "pointer", color: "#007bff" }} 
+                                onClick={() => navigator.clipboard.writeText(url)}
+                            />
+                        </p>
                     </div>
                 ))}
             </div>
